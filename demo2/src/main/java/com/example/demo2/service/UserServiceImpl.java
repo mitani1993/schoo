@@ -10,15 +10,16 @@ import com.example.demo2.form.UserForm;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    /**
-     * ユーザFormの内容をEntityに変換して返します.
-     *
-     * @param userForm ユーザForm情報
-     * @return ユーザEntityクラス
-     */
+    // ユーザID管理用
+    private int userId = 0;
+
     public UserEntity createUser(UserForm userForm) {
-        // FormクラスからEntityクラスに情報を詰め替え
+        // ユーザ情報
+        // Entityクラスは本来DBなどに格納する用途（今回はDB使用無しなのでここまで）
         UserEntity userEntity = new UserEntity();
+        // ユーザIDを更新（IDも本来はDBなどで管理する）
+        userId = userId + 1;
+        userEntity.setUserId(userId);
         userEntity.setUserName(userForm.getUserName());
         userEntity.setAge(userForm.getAge());
         return userEntity;

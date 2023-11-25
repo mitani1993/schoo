@@ -18,6 +18,7 @@
 						<p class="text-center my-4">登録しました</p>
 						<h4 class="login-heading my-4">登録された情報</h4>
 						<div th:object="${userEntity}">
+							ユーザID:<span th:text="*{userId}"></span><br>
 							ユーザ名:<span th:text="*{userName}"></span><br>
 							年齢:<span th:text="*{age}"></span>
 						</div><br>
