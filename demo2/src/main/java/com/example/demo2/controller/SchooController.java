@@ -24,19 +24,17 @@ public class SchooController {
 
     /**
      * トップページの表示
-     * 
+     *
      * @return index.htmlのパス
      */
     @GetMapping("/")
     public String index() {
-        System.out.println("----- Controllerクラス index メソッド開始 -----");
-        System.out.println("----- Controllerクラス index メソッド終了 -----");
         return "index";
     }
 
     /**
      * ユーザ情報登録処理
-     * 
+     *
      * @param userForm      ユーザ用Form
      * @param bindingResult 入力チェック結果
      * @param model         次ページに渡す情報
@@ -46,16 +44,13 @@ public class SchooController {
     public String regist(@Validated @ModelAttribute UserForm userForm,
             BindingResult bindingResult,
             Model model) {
-        System.out.println("----- Controllerクラス regist メソッド開始 -----");
         // 今回は登録処理はなくてOKです
         // 入力値のチェックを行い結果によって次の画面を変更
         if (bindingResult.hasErrors()) {
-            System.out.println("----- Controllerクラス regist メソッド終了 -----");
             return "regist-ng";
         } else {
             UserEntity userEntity = userService.createUser(userForm);
             model.addAttribute("userEntity", userEntity);
-            System.out.println("----- Controllerクラス regist メソッド終了 -----");
             return "regist-ok";
         }
     }
