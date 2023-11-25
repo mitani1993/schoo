@@ -16,12 +16,17 @@ public class UserServiceImpl implements UserService {
     public UserEntity createUser(UserForm userForm) {
         // ユーザ情報
         // Entityクラスは本来DBなどに格納する用途（今回はDB使用無しなのでここまで）
-        UserEntity userEntity = new UserEntity();
-        // ユーザIDを更新（IDも本来はDBなどで管理する）
-        userId = userId + 1;
-        userEntity.setUserId(userId);
-        userEntity.setUserName(userForm.getUserName());
-        userEntity.setAge(userForm.getAge());
+        UserEntity userEntity = null;
+
+        // 年齢が20歳以上の場合のみ登録処理を実行
+        if (userForm.getAge() >= 20) {
+            userEntity = new UserEntity();
+            // ユーザIDを更新（IDも本来はDBなどで管理する）
+            userId = userId + 1;
+            userEntity.setUserId(userId);
+            userEntity.setUserName(userForm.getUserName());
+            userEntity.setAge(userForm.getAge());
+        }
         return userEntity;
     }
 }
