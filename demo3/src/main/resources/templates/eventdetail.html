@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 今回のサンプルで使用しているCSS（bootstrap）の読み込み -->
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+			crossorigin="anonymous">
+		<title>output</title>
+	</head>
+	<body>
+		<div class="login align-items-center py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-lg-8 mx-auto">
+						<h3 class="login-heading my-4">イベント詳細</h3>
+						<!-- modelにeventというキーでセットされてきた情報の表示 -->
+						<table class="table table-striped">
+							<tr>
+								<th>イベントID</th>
+								<th>イベント名</th>
+								<th>イベント開催日</th>
+								<th>イベント開催場所</th>
+							</tr>
+							<tr>
+								<td th:text="${event.eventId}"></td>
+								<td th:text="${event.eventName}"></td>
+								<td th:text="${event.eventDate}"></td>
+								<td th:text="${event.eventVenue}"></td>
+							</tr>
+						</table>
+
+						<h3 class="login-heading my-4">このイベントの参加者</h3>
+						<table class="table table-striped">
+							<tr>
+								<th>参加者ID</th>
+								<th>参加者名</th>
+							</tr>
+							<!-- Thymeleafの繰り返し処理 -->
+							<!-- modelにparticipantListというキーでセットされてきたリストを繰り返しで表示 -->
+							<!-- リスト（配列）のparticipantListから1ずつ要素を取得してparticipant（変数）に格納 -->
+							<tr th:each="participant : ${participantList}">
+								<td th:text="${participant.participantId}"></td>
+								<td th:text="${participant.participantName}"></td>
+							</tr>
+						</table>
+						<br>
+						<h3 class="login-heading my-4">イベント参加</h3>
+						<form action="add" method="post">
+							<div class="form-label-group">
+								<label for="participantName">参加者名</label>
+								<input type="text"
+									id="participantName"
+									name="participantName"
+									class="form-control">
+							</div>
+							<!-- イベント参加処理に受け渡すイベントIDをhiddenにセット -->
+							<input type="hidden"
+								id="eventId"
+								neme="eventId"
+								th:field="${event.eventId}">
+							<br>
+							<button
+								class="btn btn-lg btn-primary btn-block btn-login font-weight-bold mb-2"
+								type="submit">このイベントに参加する</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
