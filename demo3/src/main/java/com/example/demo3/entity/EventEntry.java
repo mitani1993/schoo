@@ -1,37 +1,30 @@
 package com.example.demo3.entity;
 
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
 import lombok.Data;
 
 /**
- * eventテーブルのEntityクラスです
+ * event_entryテーブルのEntityクラスです
  */
 @Data
 @Entity
-@Table(name = "entry")
+@Table(name = "event_entry")
 public class EventEntry {
-    // イベントID
+    // イベント参加ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_entry_id")
+    private Integer eventEntryId;
+    // イベントID
     @Column(name = "event_id")
     private Integer eventId;
-    // イベント名
-    @Column(name = "event_name")
-    private String eventName;
-    // イベント開催場所
-    @Column(name = "event_venue")
-    private String eventVenue;
-    // イベント日付
-    @Column(name = "event_date")
-    @Temporal(TemporalType.DATE)
-    private Date eventDate;
+    // イベント参加者ID
+    @Column(name = "participant_id")
+    private Integer participantId;
 }
